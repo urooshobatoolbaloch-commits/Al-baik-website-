@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Al Baik Pizza – Fast Food & Catering | Khairpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #e8212a;
+    --red-dark: #b5161e;
+    --yellow: #ffc107;
+    --dark: #111;
+    --dark2: #1a1a1a;
+    --dark3: #222;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --text: #333;
+    --shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Nunito', sans-serif; background:#fff; color:var(--text); }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top:0; left:0; width:100%; z-index:1000;
+    background: rgba(17,17,17,0.97);
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 0 5%;
+    height: 68px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 20px rgba(232,33,42,0.2);
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:12px;
+  }
+  .nav-logo .logo-circle {
+    width:46px; height:46px; background:var(--red);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Oswald',sans-serif; font-weight:700; color:#fff; font-size:18px;
+    letter-spacing:1px; border:2px solid var(--yellow);
+    flex-shrink:0;
+  }
+  .nav-logo span { font-family:'Oswald',sans-serif; font-weight:700; color:#fff; font-size:20px; }
+  .nav-logo span b { color:var(--yellow); }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { color:#ccc; text-decoration:none; font-weight:600; font-size:14px; letter-spacing:.5px; transition:.2s; }
+  .nav-links a:hover { color:var(--yellow); }
+  .nav-cta {
+    background:var(--red); color:#fff; border:none; padding:10px 22px;
+    border-radius:30px; font-family:'Nunito',sans-serif; font-weight:700; font-size:14px;
+    cursor:pointer; transition:.2s; text-decoration:none;
+  }
+  .nav-cta:hover { background:var(--yellow); color:var(--dark); }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .hamburger span { width:24px; height:2px; background:#fff; transition:.3s; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #111 0%, #1e0a0a 50%, #2a0a0a 100%);
+    display:flex; align-items:center; justify-content:center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(232,33,42,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,193,7,0.08) 0%, transparent 50%);
+  }
+  .hero-grid {
+    display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:60px;
+    max-width:1200px; width:100%; position:relative; z-index:1;
+  }
+  .hero-tag {
+    display:inline-block; background:rgba(255,193,7,0.15); color:var(--yellow);
+    border:1px solid rgba(255,193,7,0.3); padding:6px 16px; border-radius:20px;
+    font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px;
+  }
+  .hero h1 {
+    font-family:'Oswald',sans-serif; font-size:clamp(42px,6vw,78px);
+    font-weight:700; color:#fff; line-height:1.05; margin-bottom:20px;
+  }
+  .hero h1 .accent { color:var(--red); }
+  .hero p { color:#aaa; font-size:17px; line-height:1.7; margin-bottom:36px; }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+  .btn-primary {
+    background: var(--red); color:#fff; padding:14px 32px;
+    border-radius:50px; font-weight:700; font-size:15px; text-decoration:none;
+    border:none; cursor:pointer; transition:.25s; display:inline-flex; align-items:center; gap:8px;
+    box-shadow: 0 4px 20px rgba(232,33,42,0.4);
+  }
+  .btn-primary:hover { background:var(--red-dark); transform:translateY(-2px); }
+  .btn-whatsapp {
+    background: #25D366; color:#fff; padding:14px 32px;
+    border-radius:50px; font-weight:700; font-size:15px; text-decoration:none;
+    border:none; cursor:pointer; transition:.25s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-whatsapp:hover { background:#1da851; transform:translateY(-2px); }
+  .hero-visual {
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .hero-img-wrap {
+    width:420px; height:420px; border-radius:50%;
+    background: radial-gradient(circle, rgba(232,33,42,0.2) 0%, transparent 70%);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .hero-img-wrap::before {
+    content:''; position:absolute;
+    width:380px; height:380px; border-radius:50%;
+    border: 2px dashed rgba(255,193,7,0.3);
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .hero-emoji { font-size:180px; filter:drop-shadow(0 20px 40px rgba(232,33,42,0.5)); animation:float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+  .hero-badges {
+    position:absolute; bottom:40px; left:5%;
+    display:flex; gap:16px;
+  }
+  .badge {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px); padding:12px 20px; border-radius:12px;
+    color:#fff; text-align:center;
+  }
+  .badge strong { display:block; font-family:'Oswald',sans-serif; font-size:22px; color:var(--yellow); }
+  .badge span { font-size:12px; color:#aaa; }
+
+  /* ===== SECTIONS ===== */
+  section { padding:80px 5%; }
+  .section-label {
+    text-align:center; font-size:12px; font-weight:700; letter-spacing:3px;
+    text-transform:uppercase; color:var(--red); margin-bottom:12px;
+  }
+  .section-title {
+    text-align:center; font-family:'Oswald',sans-serif; font-size:clamp(32px,4vw,52px);
+    font-weight:700; color:var(--dark); margin-bottom:12px; line-height:1.1;
+  }
+  .section-sub {
+    text-align:center; color:#777; font-size:16px; max-width:560px; margin:0 auto 50px;
+  }
+
+  /* ===== MENU ===== */
+  .menu-section { background:var(--grey); }
+  .menu-tabs {
+    display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:40px;
+  }
+  .tab-btn {
+    padding:10px 24px; border-radius:30px; border:2px solid #ddd;
+    background:#fff; font-family:'Nunito',sans-serif; font-weight:700; font-size:14px;
+    cursor:pointer; transition:.2s; color:#555;
+  }
+  .tab-btn.active, .tab-btn:hover { background:var(--red); color:#fff; border-color:var(--red); }
+  .menu-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px;
+    max-width:1200px; margin:0 auto;
+  }
+  .menu-card {
+    background:#fff; border-radius:20px; overflow:hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition:.3s;
+    display:none;
+  }
+  .menu-card.show { display:block; }
+  .menu-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.15); }
+  .menu-img {
+    height:180px; display:flex; align-items:center; justify-content:center;
+    font-size:80px;
+    background: linear-gradient(135deg, #fff5f5, #fff0e0);
+  }
+  .menu-body { padding:18px; }
+  .menu-name { font-family:'Oswald',sans-serif; font-size:20px; font-weight:600; color:var(--dark); margin-bottom:6px; }
+  .menu-desc { color:#888; font-size:13px; margin-bottom:14px; line-height:1.5; }
+  .menu-footer { display:flex; align-items:center; justify-content:space-between; }
+  .menu-price { font-family:'Oswald',sans-serif; font-size:22px; font-weight:700; color:var(--red); }
+  .add-btn {
+    background:var(--red); color:#fff; border:none; width:36px; height:36px;
+    border-radius:50%; font-size:20px; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center;
+  }
+  .add-btn:hover { background:var(--red-dark); transform:scale(1.1); }
+
+  /* ===== CART ===== */
+  .cart-float {
+    position:fixed; bottom:30px; right:30px; z-index:999;
+    background:var(--red); color:#fff; border:none;
+    width:60px; height:60px; border-radius:50%; font-size:22px; cursor:pointer;
+    box-shadow: 0 6px 24px rgba(232,33,42,0.5); transition:.2s;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cart-float:hover { background:var(--red-dark); transform:scale(1.1); }
+  .cart-count {
+    position:absolute; top:-4px; right:-4px;
+    background:var(--yellow); color:var(--dark); width:22px; height:22px;
+    border-radius:50%; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ===== CART MODAL ===== */
+  .modal-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7);
+    z-index:2000; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.open { display:flex; }
+  .cart-modal {
+    background:#fff; border-radius:24px; width:100%; max-width:500px;
+    max-height:90vh; overflow-y:auto;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+  .cart-header {
+    padding:24px 24px 16px; display:flex; justify-content:space-between; align-items:center;
+    border-bottom:1px solid #eee;
+    position:sticky; top:0; background:#fff; z-index:1;
+  }
+  .cart-header h2 { font-family:'Oswald',sans-serif; font-size:24px; }
+  .close-btn { background:none; border:none; font-size:24px; cursor:pointer; color:#888; }
+  .cart-items { padding:16px 24px; }
+  .cart-item {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 0; border-bottom:1px solid #f0f0f0;
+  }
+  .cart-item-emoji { font-size:32px; }
+  .cart-item-info { flex:1; }
+  .cart-item-name { font-weight:700; font-size:14px; }
+  .cart-item-price { color:var(--red); font-weight:700; font-size:14px; }
+  .cart-item-qty { display:flex; align-items:center; gap:8px; }
+  .qty-btn { background:var(--grey); border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:16px; font-weight:700; }
+  .qty-btn:hover { background:var(--red); color:#fff; }
+  .cart-footer { padding:16px 24px 24px; }
+  .cart-total { font-family:'Oswald',sans-serif; font-size:22px; margin-bottom:16px; display:flex; justify-content:space-between; }
+  .cart-total span { color:var(--red); }
+  .order-form input, .order-form textarea, .order-form select {
+    width:100%; padding:12px 16px; border:1.5px solid #ddd; border-radius:10px;
+    font-family:'Nunito',sans-serif; font-size:14px; margin-bottom:10px;
+    transition:.2s; outline:none;
+  }
+  .order-form input:focus, .order-form textarea:focus { border-color:var(--red); }
+  .order-form label { font-weight:700; font-size:13px; color:#555; display:block; margin-bottom:4px; }
+  .btn-order-wa {
+    width:100%; background:#25D366; color:#fff; border:none; padding:14px;
+    border-radius:12px; font-family:'Nunito',sans-serif; font-weight:700; font-size:16px;
+    cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .btn-order-wa:hover { background:#1da851; }
+
+  /* ===== WHY US ===== */
+  .features-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px;
+    max-width:1100px; margin:0 auto;
+  }
+  .feature-card {
+    background:#fff; border-radius:20px; padding:32px 24px; text-align:center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07); transition:.3s;
+    border-bottom:4px solid transparent;
+  }
+  .feature-card:hover { border-bottom-color:var(--red); transform:translateY(-4px); }
+  .feature-icon { font-size:48px; margin-bottom:16px; }
+  .feature-card h3 { font-family:'Oswald',sans-serif; font-size:20px; margin-bottom:8px; }
+  .feature-card p { color:#888; font-size:14px; line-height:1.6; }
+
+  /* ===== REVIEWS ===== */
+  .reviews-section { background: linear-gradient(135deg, #111 0%, #1e0a0a 100%); }
+  .reviews-section .section-title { color:#fff; }
+  .reviews-section .section-sub { color:#aaa; }
+  .stars { color:var(--yellow); font-size:20px; margin-bottom:8px; }
+  .reviews-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px;
+    max-width:1100px; margin:0 auto;
+  }
+  .review-card {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    border-radius:20px; padding:28px; backdrop-filter:blur(10px);
+    transition:.3s;
+  }
+  .review-card:hover { background:rgba(255,255,255,0.1); transform:translateY(-4px); }
+  .review-text { color:#ccc; font-size:15px; line-height:1.7; margin-bottom:16px; font-style:italic; }
+  .reviewer { display:flex; align-items:center; gap:12px; }
+  .reviewer-avatar {
+    width:44px; height:44px; border-radius:50%; background:var(--red);
+    display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:16px;
+  }
+  .reviewer-name { font-weight:700; color:#fff; font-size:14px; }
+  .reviewer-date { color:#777; font-size:12px; }
+
+  /* ===== CONTACT ===== */
+  .contact-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; max-width:1100px; margin:0 auto; align-items:start;
+  }
+  .contact-info h3 { font-family:'Oswald',sans-serif; font-size:32px; margin-bottom:24px; }
+  .contact-item { display:flex; gap:16px; margin-bottom:24px; align-items:flex-start; }
+  .contact-icon { width:48px; height:48px; background:rgba(232,33,42,0.1); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .contact-item h4 { font-weight:700; margin-bottom:4px; }
+  .contact-item p, .contact-item a { color:#777; font-size:14px; text-decoration:none; }
+  .contact-item a:hover { color:var(--red); }
+  .contact-form-wrap { background:var(--grey); border-radius:24px; padding:36px; }
+  .contact-form-wrap h3 { font-family:'Oswald',sans-serif; font-size:24px; margin-bottom:24px; }
+  .contact-form input, .contact-form textarea {
+    width:100%; padding:12px 16px; border:1.5px solid #ddd; border-radius:10px;
+    font-family:'Nunito',sans-serif; font-size:14px; margin-bottom:14px; outline:none;
+    background:#fff; transition:.2s;
+  }
+  .contact-form input:focus, .contact-form textarea:focus { border-color:var(--red); }
+  .contact-form textarea { height:120px; resize:vertical; }
+  .btn-send {
+    background:var(--red); color:#fff; border:none; padding:13px 32px;
+    border-radius:10px; font-family:'Nunito',sans-serif; font-weight:700; font-size:15px;
+    cursor:pointer; width:100%; transition:.2s;
+  }
+  .btn-send:hover { background:var(--red-dark); }
+
+  /* ===== MAP ===== */
+  .map-section { background:var(--dark); padding:0; }
+  .map-wrap { height:400px; position:relative; overflow:hidden; }
+  .map-wrap iframe { width:100%; height:100%; border:none; }
+  .map-overlay {
+    position:absolute; top:30px; left:30px;
+    background:rgba(17,17,17,0.9); color:#fff; padding:20px 24px; border-radius:16px;
+    backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.1);
+  }
+  .map-overlay h4 { font-family:'Oswald',sans-serif; font-size:18px; margin-bottom:6px; }
+  .map-overlay p { color:#aaa; font-size:13px; }
+
+  /* ===== WHATSAPP CHATBOT ===== */
+  .wa-fab {
+    position:fixed; bottom:100px; right:30px; z-index:999;
+    background:#25D366; color:#fff; border:none;
+    width:56px; height:56px; border-radius:50%; font-size:26px; cursor:pointer;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.5); transition:.2s;
+    display:flex; align-items:center; justify-content:center;
+    animation: pulse-wa 2s infinite;
+  }
+  @keyframes pulse-wa {
+    0%,100%{box-shadow:0 6px 24px rgba(37,211,102,0.5)}
+    50%{box-shadow:0 6px 40px rgba(37,211,102,0.8)}
+  }
+  .wa-fab:hover { background:#1da851; transform:scale(1.1); }
+  .wa-tooltip {
+    position:fixed; bottom:115px; right:100px;
+    background:#333; color:#fff; padding:8px 14px; border-radius:8px;
+    font-size:13px; font-weight:600; white-space:nowrap;
+    opacity:0; pointer-events:none; transition:.2s;
+  }
+  .wa-fab:hover + .wa-tooltip { opacity:1; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background:var(--dark); color:#aaa; text-align:center; padding:40px 5%;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  footer .footer-logo { font-family:'Oswald',sans-serif; font-size:28px; color:#fff; margin-bottom:12px; }
+  footer .footer-logo b { color:var(--red); }
+  footer p { font-size:14px; margin-bottom:8px; }
+  footer .footer-links { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+  footer .footer-links a { color:#666; text-decoration:none; font-size:13px; transition:.2s; }
+  footer .footer-links a:hover { color:var(--yellow); }
+
+  /* ===== MOBILE ===== */
+  @media(max-width:768px) {
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+    .hero-grid { grid-template-columns:1fr; text-align:center; }
+    .hero-visual { order:-1; }
+    .hero-img-wrap { width:280px; height:280px; }
+    .hero-emoji { font-size:120px; }
+    .hero-badges { position:static; justify-content:center; margin-top:30px; }
+    .hero-btns { justify-content:center; }
+    .contact-grid { grid-template-columns:1fr; }
+    .map-overlay { top:16px; left:16px; right:16px; }
+  }
+
+  /* notification */
+  .toast {
+    position:fixed; top:80px; right:20px; z-index:3000;
+    background:var(--dark); color:#fff; padding:12px 20px;
+    border-radius:10px; font-weight:600; font-size:14px;
+    border-left:4px solid var(--yellow);
+    transform:translateX(200%); transition:.3s;
+    box-shadow: var(--shadow);
+  }
+  .toast.show { transform:translateX(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-circle">AB</div>
+    <span>Al <b>Baik</b> Pizza</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#why-us">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#menu" class="nav-cta">Order Now</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <span class="hero-tag">📍 Mirwah Colony, Khairpur</span>
+      <h1>Fast Food<br>Done <span class="accent">Right.</span></h1>
+      <p>Crispy pizzas, juicy burgers & golden fries — made fresh every time. Family-friendly, fast delivery & catering available across Khairpur.</p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-primary">🍕 Order Now</a>
+        <a href="https://wa.me/923001234567" target="_blank" class="btn-whatsapp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <div class="hero-emoji">🍕</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="badge"><strong>4.0★</strong><span>Rating</span></div>
+    <div class="badge"><strong>3pm</strong><span>Opens Daily</span></div>
+    <div class="badge"><strong>Fast</strong><span>Delivery</span></div>
+    <div class="badge"><strong>100%</strong><span>Fresh Ingredients</span></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-label">Our Menu</div>
+  <h2 class="section-title">What Are You Craving?</h2>
+  <p class="section-sub">Fresh ingredients, bold flavors — every dish made to order.</p>
+
+  <div class="menu-tabs">
+    <button class="tab-btn active" onclick="filterMenu('all')">🍽️ All</button>
+    <button class="tab-btn" onclick="filterMenu('pizza')">🍕 Pizza</button>
+    <button class="tab-btn" onclick="filterMenu('burger')">🍔 Burgers</button>
+    <button class="tab-btn" onclick="filterMenu('fries')">🍟 Fries & Sides</button>
+    <button class="tab-btn" onclick="filterMenu('drinks')">🥤 Drinks</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid">
+    <!-- PIZZAS -->
+    <div class="menu-card show" data-cat="pizza">
+      <div class="menu-img">🍕</div>
+      <div class="menu-body">
+        <div class="menu-name">Chicken Tikka Pizza</div>
+        <div class="menu-desc">Spicy chicken tikka, fresh veggies & extra cheese on a crispy crust.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 650</div>
+          <button class="add-btn" onclick="addToCart('Chicken Tikka Pizza', 650, '🍕')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="pizza">
+      <div class="menu-img">🍕</div>
+      <div class="menu-body">
+        <div class="menu-name">BBQ Chicken Pizza</div>
+        <div class="menu-desc">Smoky BBQ sauce, grilled chicken & mozzarella — family favourite.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 700</div>
+          <button class="add-btn" onclick="addToCart('BBQ Chicken Pizza', 700, '🍕')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="pizza">
+      <div class="menu-img">🍕</div>
+      <div class="menu-body">
+        <div class="menu-name">Veggie Supreme Pizza</div>
+        <div class="menu-desc">Loaded with fresh capsicum, olives, mushrooms & tomato.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 550</div>
+          <button class="add-btn" onclick="addToCart('Veggie Supreme Pizza', 550, '🍕')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="pizza">
+      <div class="menu-img">🍕</div>
+      <div class="menu-body">
+        <div class="menu-name">Double Cheese Pizza</div>
+        <div class="menu-desc">Double mozzarella pull, garlic base & a crispy golden edge.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 750</div>
+          <button class="add-btn" onclick="addToCart('Double Cheese Pizza', 750, '🍕')">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- BURGERS -->
+    <div class="menu-card show" data-cat="burger">
+      <div class="menu-img">🍔</div>
+      <div class="menu-body">
+        <div class="menu-name">Crispy Chicken Burger</div>
+        <div class="menu-desc">Crispy fried chicken fillet, mayo, lettuce & pickles in a soft bun.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 350</div>
+          <button class="add-btn" onclick="addToCart('Crispy Chicken Burger', 350, '🍔')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="burger">
+      <div class="menu-img">🍔</div>
+      <div class="menu-body">
+        <div class="menu-name">Zinger Burger</div>
+        <div class="menu-desc">Our spicy signature zinger fillet — hot, crunchy & irresistible.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 400</div>
+          <button class="add-btn" onclick="addToCart('Zinger Burger', 400, '🍔')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="burger">
+      <div class="menu-img">🍔</div>
+      <div class="menu-body">
+        <div class="menu-name">Double Patty Burger</div>
+        <div class="menu-desc">Two beef patties, cheddar cheese, sauce & caramelized onions.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 500</div>
+          <button class="add-btn" onclick="addToCart('Double Patty Burger', 500, '🍔')">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- FRIES -->
+    <div class="menu-card show" data-cat="fries">
+      <div class="menu-img">🍟</div>
+      <div class="menu-body">
+        <div class="menu-name">Loaded Fries</div>
+        <div class="menu-desc">Crispy fries topped with cheese sauce, jalapeños & mayo.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 250</div>
+          <button class="add-btn" onclick="addToCart('Loaded Fries', 250, '🍟')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="fries">
+      <div class="menu-img">🍟</div>
+      <div class="menu-body">
+        <div class="menu-name">Regular Fries</div>
+        <div class="menu-desc">Golden crispy salted fries — the classic side you love.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 150</div>
+          <button class="add-btn" onclick="addToCart('Regular Fries', 150, '🍟')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="fries">
+      <div class="menu-img">🌮</div>
+      <div class="menu-body">
+        <div class="menu-name">Chicken Nuggets (6pc)</div>
+        <div class="menu-desc">Tender chicken nuggets with smoky dipping sauce.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 280</div>
+          <button class="add-btn" onclick="addToCart('Chicken Nuggets (6pc)', 280, '🌮')">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- DRINKS -->
+    <div class="menu-card show" data-cat="drinks">
+      <div class="menu-img">🥤</div>
+      <div class="menu-body">
+        <div class="menu-name">Cold Drink (500ml)</div>
+        <div class="menu-desc">Pepsi, 7UP, or Mirinda — chilled & refreshing.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 80</div>
+          <button class="add-btn" onclick="addToCart('Cold Drink', 80, '🥤')">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card show" data-cat="drinks">
+      <div class="menu-img">🧃</div>
+      <div class="menu-body">
+        <div class="menu-name">Fresh Lemonade</div>
+        <div class="menu-desc">Freshly squeezed with mint & a hint of chat masala.</div>
+        <div class="menu-footer">
+          <div class="menu-price">Rs. 120</div>
+          <button class="add-btn" onclick="addToCart('Fresh Lemonade', 120, '🧃')">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why-us">
+  <div class="section-label">Why Choose Us</div>
+  <h2 class="section-title">More Than Just Food</h2>
+  <p class="section-sub">We're committed to quality, speed, and making every visit memorable.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <h3>Made Fresh Daily</h3>
+      <p>Every item is prepared fresh using quality ingredients — no shortcuts, no frozen shortcuts.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🚀</div>
+      <h3>Fast Delivery</h3>
+      <p>Quick and reliable delivery right to your doorstep across Khairpur Mir's.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👨‍👩‍👧</div>
+      <h3>Family Friendly</h3>
+      <p>A welcoming, cosy dine-in space where families and friends can enjoy together.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎉</div>
+      <h3>Catering Available</h3>
+      <p>Planning an event? We offer full catering packages for parties, weddings & corporate events.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="section-label" style="color:var(--yellow)">Customer Reviews</div>
+  <h2 class="section-title">What People Are Saying</h2>
+  <p class="section-sub">Real reviews from our valued customers.</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Best pizza in Khairpur! The chicken tikka pizza is absolutely amazing. Perfect crust and loads of cheese. Will definitely order again!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">A</div>
+        <div>
+          <div class="reviewer-name">Ahmed Khan</div>
+          <div class="reviewer-date">Verified Customer</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Ordered zinger burger and loaded fries. Both were delicious and came hot. Great value for money. Highly recommended for everyone!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">S</div>
+        <div>
+          <div class="reviewer-name">Sara Mirza</div>
+          <div class="reviewer-date">Verified Customer</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Had their catering for a family event and everyone loved it! The team was professional and the food was exceptional. 10/10 service!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">R</div>
+        <div>
+          <div class="reviewer-name">Raza Ali</div>
+          <div class="reviewer-date">Verified Customer</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Family-friendly place with a great atmosphere. Kids loved the nuggets and we loved the pizza. Good prices too. Our go-to spot now!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">F</div>
+        <div>
+          <div class="reviewer-name">Faisal Soomro</div>
+          <div class="reviewer-date">Verified Customer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Find Us & Contact Us</h2>
+  <p class="section-sub">We'd love to hear from you. Order, ask questions, or book catering!</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Al Baik Pizza Fast Food & Catering</h3>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <h4>Location</h4>
+          <p>GQG4+62G, Mirwah Colony,<br>Khairpur, Sindh, Pakistan</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <h4>Phone / WhatsApp</h4>
+          <a href="tel:+923001234567">+92 300 1234567</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <h4>Opening Hours</h4>
+          <p>Daily: 3:00 PM – 12:00 AM</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div>
+          <h4>WhatsApp Order</h4>
+          <a href="https://wa.me/923001234567?text=Hi%20Al%20Baik%20Pizza!%20I%20want%20to%20place%20an%20order." target="_blank">Chat on WhatsApp →</a>
+        </div>
+      </div>
+      <a href="https://wa.me/923001234567" target="_blank" class="btn-whatsapp" style="display:inline-flex;margin-top:8px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Order Now
+      </a>
+    </div>
+    <div class="contact-form-wrap">
+      <h3>Send a Message</h3>
+      <form class="contact-form" onsubmit="sendContactWA(event)">
+        <label>Your Name</label>
+        <input type="text" id="cf-name" placeholder="e.g. Ahmed Khan" required/>
+        <label>Phone Number</label>
+        <input type="tel" id="cf-phone" placeholder="e.g. 03001234567" required/>
+        <label>Message</label>
+        <textarea id="cf-msg" placeholder="Ask about catering, menu, delivery etc..." required></textarea>
+        <button type="submit" class="btn-send">Send via WhatsApp 💬</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Mirwah+Colony+Khairpur&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
+    <div class="map-overlay">
+      <h4>📍 Al Baik Pizza</h4>
+      <p>GQG4+62G, Mirwah Colony<br>Khairpur, Sindh</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Al <b>Baik</b> Pizza</div>
+  <p>Fast Food & Catering | Mirwah Colony, Khairpur</p>
+  <p>📞 +92 300 1234567 &nbsp;|&nbsp; 🕐 Open Daily 3PM – 12AM</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/923001234567" target="_blank">WhatsApp</a>
+  </div>
+  <p style="margin-top:20px;font-size:12px;color:#444">© 2025 Al Baik Pizza Fast Food & Catering. All rights reserved.</p>
+</footer>
+
+<!-- CART FLOAT BTN -->
+<button class="cart-float" onclick="openCart()" id="cartBtn" style="display:none">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- WHATSAPP FAB -->
+<a class="wa-fab" href="https://wa.me/923001234567?text=Hi%20Al%20Baik%20Pizza!%20I%20have%20a%20question." target="_blank">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="wa-tooltip">Chat with us!</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+  <div class="cart-modal">
+    <div class="cart-header">
+      <h2>🛒 Your Order</h2>
+      <button class="close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p style="text-align:center;color:#aaa;padding:30px 0">Your cart is empty. Add some items!</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cartTotal">Rs. 0</span></div>
+      <div class="order-form">
+        <label>Your Name *</label>
+        <input type="text" id="orderName" placeholder="Enter your name"/>
+        <label>Phone Number *</label>
+        <input type="tel" id="orderPhone" placeholder="e.g. 03001234567"/>
+        <label>Delivery Address</label>
+        <input type="text" id="orderAddr" placeholder="Street, area (or Dine-in)"/>
+        <label>Order Type</label>
+        <select id="orderType">
+          <option>Delivery</option>
+          <option>Dine-in</option>
+          <option>Takeaway</option>
+        </select>
+      </div>
+      <button class="btn-order-wa" onclick="placeOrder()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Place Order via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  // Cart state
+  let cart = [];
+
+  function addToCart(name, price, emoji) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price, emoji, qty: 1 });
+    }
+    updateCartUI();
+    showToast(`${emoji} ${name} added to cart!`);
+    document.getElementById('cartBtn').style.display = 'flex';
+  }
+
+  function updateCartUI() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartTotal').textContent = `Rs. ${total.toLocaleString()}`;
+
+    const itemsEl = document.getElementById('cartItems');
+    if (cart.length === 0) {
+      itemsEl.innerHTML = '<p style="text-align:center;color:#aaa;padding:30px 0">Your cart is empty.</p>';
+      return;
+    }
+    itemsEl.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item">
+        <span class="cart-item-emoji">${item.emoji}</span>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">Rs. ${(item.price * item.qty).toLocaleString()}</div>
+        </div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty(${idx}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function changeQty(idx, delta) {
+    cart[idx].qty += delta;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    updateCartUI();
+    if (cart.length === 0) document.getElementById('cartBtn').style.display = 'none';
+  }
+
+  function openCart() { document.getElementById('cartOverlay').classList.add('open'); }
+  function closeCart() { document.getElementById('cartOverlay').classList.remove('open'); }
+  function closeCartOutside(e) { if (e.target.id === 'cartOverlay') closeCart(); }
+
+  function placeOrder() {
+    const name = document.getElementById('orderName').value.trim();
+    const phone = document.getElementById('orderPhone').value.trim();
+    const addr = document.getElementById('orderAddr').value.trim();
+    const type = document.getElementById('orderType').value;
+    if (!name || !phone) { showToast('⚠️ Please enter your name and phone!'); return; }
+    if (cart.length === 0) { showToast('⚠️ Your cart is empty!'); return; }
+
+    const total = cart.reduce((s,i) => s + i.price * i.qty, 0);
+    let msg = `🍕 *New Order - Al Baik Pizza*\n\n`;
+    msg += `👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n🏠 *${type}:* ${addr || type}\n\n`;
+    msg += `*Order Details:*\n`;
+    cart.forEach(i => { msg += `• ${i.emoji} ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}\n`; });
+    msg += `\n💰 *Total: Rs. ${total.toLocaleString()}*`;
+
+    window.open(`https://wa.me/923001234567?text=${encodeURIComponent(msg)}`, '_blank');
+    closeCart();
+    cart = [];
+    updateCartUI();
+    document.getElementById('cartBtn').style.display = 'none';
+    showToast('✅ Order sent via WhatsApp!');
+  }
+
+  function sendContactWA(e) {
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const phone = document.getElementById('cf-phone').value;
+    const msg = document.getElementById('cf-msg').value;
+    const text = `Hi Al Baik Pizza! 👋\n\n*Name:* ${name}\n*Phone:* ${phone}\n\n${msg}`;
+    window.open(`https://wa.me/923001234567?text=${encodeURIComponent(text)}`, '_blank');
+    showToast('✅ Message sent via WhatsApp!');
+    e.target.reset();
+  }
+
+  function filterMenu(cat) {
+    document.querySelectorAll('.menu-card').forEach(c => {
+      c.classList.toggle('show', cat === 'all' || c.dataset.cat === cat);
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function toggleMenu() {
+    // simple mobile nav (you can extend this)
+    alert('Menu: Home | Menu | Reviews | Contact');
+  }
+
+  // animate on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.style.opacity = 1; });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.menu-card, .feature-card, .review-card').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transition = 'opacity .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
