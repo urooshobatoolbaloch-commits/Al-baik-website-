@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Contact Al Baik Pizza in Khairpur. Order via WhatsApp, call us or visit us at Mirwah Colony."/>
+  <title>Contact Us — Al Baik Pizza | Khairpur</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ===== CONTACT PAGE STYLES ===== */
+
+    /* Contact Grid */
+    .contact-layout {
+      display:grid; grid-template-columns:1fr 1.2fr; gap:64px; align-items:start;
+      max-width:1100px; margin:0 auto;
+    }
+
+    /* Info side */
+    .contact-side h2 { font-size:clamp(28px,3vw,40px); color:#fff; margin-bottom:8px; }
+    .contact-side > p { color:var(--muted); font-size:15px; line-height:1.7; margin-bottom:40px; }
+
+    .info-block {
+      display:flex; gap:16px; align-items:flex-start; margin-bottom:28px;
+      padding:20px; border-radius:14px;
+      background:var(--card-bg); border:1px solid var(--border);
+      transition:var(--transition);
+    }
+    .info-block:hover { border-color:rgba(232,33,42,.3); transform:translateX(4px); }
+    .info-icon {
+      width:48px; height:48px; flex-shrink:0; border-radius:12px;
+      background:rgba(232,33,42,.12); display:flex; align-items:center; justify-content:center;
+      font-size:22px;
+    }
+    .info-block h4 { font-weight:700; color:#fff; font-size:14px; margin-bottom:4px; letter-spacing:.5px; }
+    .info-block p, .info-block a { color:var(--muted); font-size:14px; line-height:1.6; }
+    .info-block a:hover { color:var(--gold); }
+
+    /* WA Order Block */
+    .wa-order-block {
+      background:linear-gradient(135deg, #0d2a0d, #1a3a1a);
+      border:1px solid rgba(37,211,102,.2); border-radius:16px;
+      padding:24px; margin-top:32px;
+    }
+    .wa-order-block h4 { font-family:var(--font-display); font-size:18px; color:#fff; margin-bottom:8px; }
+    .wa-order-block p { color:#aaa; font-size:13px; line-height:1.6; margin-bottom:16px; }
+
+    /* Form side */
+    .contact-form-box {
+      background:var(--card-bg); border:1px solid var(--border);
+      border-radius:24px; padding:40px;
+    }
+    .contact-form-box h3 {
+      font-family:var(--font-display); font-size:26px; color:#fff; margin-bottom:6px;
+    }
+    .contact-form-box > p { color:var(--muted); font-size:14px; margin-bottom:28px; }
+
+    /* Map */
+    .map-section { padding:0; }
+    .map-wrap { height:420px; position:relative; overflow:hidden; }
+    .map-wrap iframe { width:100%; height:100%; border:none; filter:grayscale(30%) brightness(0.8); }
+    .map-pin {
+      position:absolute; top:28px; left:28px;
+      background:rgba(15,15,15,.92); color:#fff; border-radius:16px;
+      padding:18px 22px; backdrop-filter:blur(12px);
+      border:1px solid var(--border); max-width:260px;
+    }
+    .map-pin h4 { font-family:var(--font-display); font-size:17px; margin-bottom:4px; }
+    .map-pin p { color:var(--muted); font-size:13px; margin-bottom:10px; }
+    .map-pin-hours { font-size:12px; color:var(--gold); font-weight:700; }
+
+    /* FAQ */
+    .faq-section { background:var(--dark2); }
+    .faq-list { max-width:800px; margin:0 auto; }
+    .faq-item {
+      border:1px solid var(--border); border-radius:12px;
+      margin-bottom:12px; overflow:hidden; transition:var(--transition);
+    }
+    .faq-item.open { border-color:rgba(232,33,42,.3); }
+    .faq-q {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 24px; cursor:pointer; background:var(--card-bg);
+      transition:var(--transition);
+    }
+    .faq-q:hover { background:rgba(232,33,42,.05); }
+    .faq-q span { font-weight:700; color:#fff; font-size:15px; }
+    .faq-icon { font-size:22px; color:var(--muted); transition:var(--transition); user-select:none; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); color:var(--red); }
+    .faq-a {
+      max-height:0; overflow:hidden; transition:max-height .35s ease;
+      background:var(--card-bg);
+    }
+    .faq-a p { padding:0 24px 20px; color:var(--muted); font-size:14px; line-height:1.7; }
+
+    /* Social */
+    .social-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;
+      max-width:800px; margin:0 auto;
+    }
+    .social-card {
+      padding:24px; border-radius:16px; border:1px solid var(--border);
+      background:var(--card-bg); text-align:center; transition:var(--transition);
+      cursor:pointer;
+    }
+    .social-card:hover { transform:translateY(-4px); }
+    .social-card.wa:hover { border-color:#25D366; background:rgba(37,211,102,.05); }
+    .social-card.ph:hover { border-color:var(--red); background:rgba(232,33,42,.05); }
+    .social-icon { font-size:36px; margin-bottom:10px; }
+    .social-card h4 { font-family:var(--font-display); font-size:17px; color:#fff; margin-bottom:4px; }
+    .social-card p { color:var(--muted); font-size:13px; }
+
+    @media(max-width:900px) {
+      .contact-layout { grid-template-columns:1fr; gap:40px; }
+    }
+  </style>
+</head>
+<body class="page-fade">
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">AB</div>
+    <span class="brand">Al <b>Baik</b> Pizza</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="index.html#menu" class="nav-cta btn">Order Now</a>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#menu" style="color:var(--red)">Order Now →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-line"></span>
+    <span class="page-hero-tag">Get In Touch</span>
+    <h1>We'd Love to <span class="accent">Hear From You</span></h1>
+    <p>Order food, ask a question, or book us for catering — we're always happy to help.</p>
+  </div>
+</div>
+
+<!-- CONTACT MAIN -->
+<section>
+  <div class="contact-layout">
+
+    <!-- INFO SIDE -->
+    <div class="contact-side" data-reveal>
+      <span class="section-label">Our Details</span>
+      <h2>Find Us & Reach Out</h2>
+      <p>Drop by our restaurant, give us a call, or just ping us on WhatsApp. We're here from 3PM daily.</p>
+
+      <div class="info-block">
+        <div class="info-icon">📍</div>
+        <div>
+          <h4>Our Location</h4>
+          <p>GQG4+62G, Mirwah Colony,<br>Khairpur, Sindh, Pakistan</p>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">📞</div>
+        <div>
+          <h4>Call / WhatsApp</h4>
+          <a href="tel:+923001234567">+92 300 1234567</a>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">🕐</div>
+        <div>
+          <h4>Opening Hours</h4>
+          <p>Monday – Sunday<br>3:00 PM — 12:00 AM (Midnight)</p>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-icon">🎉</div>
+        <div>
+          <h4>Catering Enquiries</h4>
+          <p>Planning an event? Contact us for customised catering packages for any occasion.</p>
+          <a href="https://wa.me/923001234567?text=Hi!%20I'd%20like%20to%20enquire%20about%20catering%20services." target="_blank" style="color:var(--gold);font-weight:700;font-size:13px">Enquire via WhatsApp →</a>
+        </div>
+      </div>
+
+      <div class="wa-order-block">
+        <h4>💬 Order via WhatsApp</h4>
+        <p>The fastest way to order is through WhatsApp. Tap below to start a chat and place your order instantly.</p>
+        <a href="https://wa.me/923001234567?text=Hi%20Al%20Baik%20Pizza!%20I%20want%20to%20place%20an%20order." target="_blank" class="btn btn-wa" style="width:100%;justify-content:center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Start WhatsApp Order
+        </a>
+      </div>
+    </div>
+
+    <!-- FORM SIDE -->
+    <div class="contact-form-box" data-reveal data-delay="150">
+      <h3>Send a Message</h3>
+      <p>Fill in the form below and we'll get back to you via WhatsApp.</p>
+      <form id="contactForm">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="c-name" placeholder="e.g. Ahmed Khan" required/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="c-phone" placeholder="e.g. 03001234567" required/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="c-subject">
+            <option>General Enquiry</option>
+            <option>Place an Order</option>
+            <option>Catering Request</option>
+            <option>Feedback / Complaint</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea id="c-message" placeholder="Tell us what you need..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-red" style="width:100%;justify-content:center">
+          Send via WhatsApp 💬
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- REACH US CHANNELS -->
+<section style="background:var(--dark2); padding-top:60px; padding-bottom:60px;">
+  <div class="container text-center mb-40">
+    <span class="section-label">How To Reach Us</span>
+    <h2 class="section-title">Multiple <span class="accent">Ways to Connect</span></h2>
+  </div>
+  <div class="social-grid">
+    <a href="https://wa.me/923001234567" target="_blank" class="social-card wa" data-reveal>
+      <div class="social-icon">💬</div>
+      <h4>WhatsApp</h4>
+      <p>Fastest way to order or ask questions</p>
+    </a>
+    <a href="tel:+923001234567" class="social-card ph" data-reveal data-delay="100">
+      <div class="social-icon">📞</div>
+      <h4>Phone Call</h4>
+      <p>+92 300 1234567</p>
+    </a>
+    <a href="#map" class="social-card" data-reveal data-delay="200">
+      <div class="social-icon">📍</div>
+      <h4>Visit Us</h4>
+      <p>Mirwah Colony, Khairpur</p>
+    </a>
+    <a href="https://wa.me/923001234567?text=Hi!%20I'd%20like%20catering%20info." target="_blank" class="social-card" data-reveal data-delay="300">
+      <div class="social-icon">🎉</div>
+      <h4>Catering</h4>
+      <p>Events, weddings & more</p>
+    </a>
+  </div>
+</section>
+
+<!-- MAP -->
+<div id="map" class="map-section">
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Mirwah+Colony+Khairpur+Sindh&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
+    <div class="map-pin">
+      <h4>📍 Al Baik Pizza</h4>
+      <p>GQG4+62G, Mirwah Colony<br>Khairpur, Sindh</p>
+      <div class="map-pin-hours">🕐 Open 3PM – 12AM Daily</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container text-center mb-40">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Frequently Asked <span class="accent">Questions</span></h2>
+  </div>
+  <div class="faq-list">
+
+    <div class="faq-item" data-reveal>
+      <div class="faq-q">
+        <span>What are your opening hours?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>We're open every day from 3:00 PM to 12:00 AM (midnight). No reservations needed for dine-in — just walk in!</p></div>
+    </div>
+
+    <div class="faq-item" data-reveal data-delay="50">
+      <div class="faq-q">
+        <span>Do you deliver to my area in Khairpur?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>We deliver across Khairpur Mir's. Contact us on WhatsApp with your address and we'll confirm availability and delivery time.</p></div>
+    </div>
+
+    <div class="faq-item" data-reveal data-delay="100">
+      <div class="faq-q">
+        <span>How do I place a delivery order?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>The easiest way is via WhatsApp — just tap the "Order Now" button and send us your order, name, phone and address. You can also call us directly at +92 300 1234567.</p></div>
+    </div>
+
+    <div class="faq-item" data-reveal data-delay="150">
+      <div class="faq-q">
+        <span>Do you offer catering for events?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>Yes! We offer full catering packages for weddings, birthdays, corporate events and all family gatherings. Contact us in advance to discuss your requirements and we'll create a custom menu for you.</p></div>
+    </div>
+
+    <div class="faq-item" data-reveal data-delay="200">
+      <div class="faq-q">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>We currently accept cash on delivery and cash in-store. For large catering orders, advance payment arrangements can be discussed.</p></div>
+    </div>
+
+    <div class="faq-item" data-reveal data-delay="250">
+      <div class="faq-q">
+        <span>Can I customise my pizza or burger?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>Absolutely! When placing your order via WhatsApp, just let us know your customisation preferences — extra cheese, no jalapeños, spicy or mild — and we'll make it exactly how you like it.</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-mark">AB</div>
+      <div class="name">Al <b>Baik</b> Pizza</div>
+      <p>Fast food & catering in Mirwah Colony, Khairpur. Serving fresh pizzas, burgers and fries since day one.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <a href="index.html#menu">Pizzas</a>
+      <a href="index.html#menu">Burgers</a>
+      <a href="index.html#menu">Fries & Sides</a>
+      <a href="index.html#menu">Drinks</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+923001234567">+92 300 1234567</a>
+      <a href="https://wa.me/923001234567" target="_blank">WhatsApp</a>
+      <a href="#">Mirwah Colony, Khairpur</a>
+      <a href="#">Open: 3PM – 12AM</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Al Baik Pizza Fast Food & Catering. All rights reserved.</p>
+    <p>Made with ❤️ in Khairpur</p>
+  </div>
+</footer>
+
+<!-- WA FAB -->
+<a style="position:fixed;bottom:32px;left:32px;z-index:800;width:52px;height:52px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,.45);transition:.25s" href="https://wa.me/923001234567" target="_blank">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
