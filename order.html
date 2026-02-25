@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Place an Order — Al Baik Pizza</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .order-layout { display:grid; grid-template-columns:1fr 380px; gap:40px; align-items:start; max-width:1200px; margin:0 auto; }
+    .order-panel { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .order-panel-head { padding:22px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .order-panel-head h3 { font-family:var(--font-d); font-size:20px; color:#fff; }
+    .order-panel-body { padding:24px; }
+    .order-item-row { display:grid; grid-template-columns:48px 1fr auto; gap:12px; align-items:center; padding:12px 0; border-bottom:1px solid var(--border); }
+    .order-item-row:last-child { border-bottom:none; }
+    .oi-emoji { font-size:28px; text-align:center; }
+    .oi-name { font-weight:600; color:#fff; font-size:14px; margin-bottom:2px; }
+    .oi-price { color:var(--muted); font-size:13px; }
+    .oi-add { width:34px; height:34px; border-radius:50%; background:var(--red); border:none; color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center; transition:var(--t); flex-shrink:0; }
+    .oi-add:hover { background:var(--red-d); transform:scale(1.1); }
+    .summary-item { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
+    .si-emoji { font-size:22px; }
+    .si-info { flex:1; }
+    .si-name { font-weight:600; color:#fff; font-size:13px; }
+    .si-sub { color:var(--muted); font-size:12px; }
+    .si-controls { display:flex; align-items:center; gap:6px; }
+    .si-btn { width:26px; height:26px; border-radius:50%; background:var(--dark-3); border:1px solid var(--border); color:#fff; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; transition:var(--t); }
+    .si-btn:hover { background:var(--red); border-color:var(--red); }
+    .si-price { color:var(--gold); font-weight:700; font-size:13px; min-width:60px; text-align:right; }
+    .step-num { width:28px; height:28px; border-radius:50%; background:var(--red); color:#fff; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    @media(max-width:900px) { .order-layout { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body class="page-enter">
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><div class="mark">AB</div><span class="name">Al <b>Baik</b> Pizza</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="products.html">Menu</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="order.html" class="nav-order" style="background:var(--gold);color:var(--dark)">Order Now →</a>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mob-nav">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Menu</a>
+  <a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="order.html" style="color:var(--gold)">Order Now →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="stripe" style="background:var(--gold)"></span>
+    <span class="eyebrow" style="color:var(--gold)">Place Your Order</span>
+    <h1>Order <span style="color:var(--gold)">Fresh Food</span><br>Right Now</h1>
+    <p>Browse the menu, add items to your order, fill in your details and we'll send it straight to WhatsApp.</p>
+  </div>
+</div>
+
+<section>
+  <div class="order-layout">
+
+    <!-- LEFT: MENU + FORM -->
+    <div>
+      <!-- STEP 1: PICK ITEMS -->
+      <div class="order-panel" style="margin-bottom:24px">
+        <div class="order-panel-head">
+          <h3>Step 1 — Build Your Order</h3>
+          <span style="font-size:13px;color:var(--muted)">Click + to add items</span>
+        </div>
+        <div class="order-panel-body">
+          <div class="filter-tabs" style="margin-bottom:24px">
+            <button class="filter-tab active" data-cat="all">All</button>
+            <button class="filter-tab" data-cat="pizza">🍕 Pizza</button>
+            <button class="filter-tab" data-cat="burger">🍔 Burgers</button>
+            <button class="filter-tab" data-cat="sides">🍟 Sides</button>
+            <button class="filter-tab" data-cat="drinks">🥤 Drinks</button>
+          </div>
+          <div id="orderMenuList"></div>
+        </div>
+      </div>
+
+      <!-- STEP 2: DETAILS -->
+      <div class="order-panel">
+        <div class="order-panel-head">
+          <h3>Step 2 — Your Details</h3>
+          <span style="font-size:13px;color:var(--muted)">Required for delivery</span>
+        </div>
+        <div class="order-panel-body">
+          <form id="orderForm">
+            <div class="form-row">
+              <div class="form-group"><label>Full Name *</label><input class="form-control" id="of-name" placeholder="e.g. Ahmed Khan" required/></div>
+              <div class="form-group"><label>Phone Number *</label><input class="form-control" id="of-phone" placeholder="03001234567" required/></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Delivery Address</label><input class="form-control" id="of-addr" placeholder="Street, Area (or 'Dine-in')"/></div>
+              <div class="form-group">
+                <label>Order Type</label>
+                <select class="form-control" id="of-type"><option>Delivery</option><option>Dine-in</option><option>Takeaway</option></select>
+              </div>
+            </div>
+            <div class="form-group"><label>Special Instructions</label><textarea class="form-control" id="of-note" style="height:90px" placeholder="Extra cheese? No jalapeños? Any special requests..."></textarea></div>
+            <button type="submit" class="btn btn-wa btn-full" style="font-size:15px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Place Order via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: ORDER SUMMARY (sticky) -->
+    <div class="order-summary">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <h3>Your Order</h3>
+        <button onclick="cart=[];saveCart();updateCartUI();renderOrderSummary();renderOrderMenu();" style="background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer">Clear all</button>
+      </div>
+      <div id="orderList">
+        <p style="color:var(--muted);font-size:13px">No items yet — add from the menu!</p>
+      </div>
+      <div class="os-total">Total: <span id="orderTotal">Rs. 0</span></div>
+      <div style="margin-top:16px;padding:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px">
+        <p style="font-size:12px;color:var(--muted);line-height:1.65">Your order will be sent via WhatsApp. We'll confirm and provide an estimated time after receiving it.</p>
+      </div>
+      <a href="https://wa.me/923001234567?text=Hi%20Al%20Baik%20Pizza!%20I%20want%20to%20place%20an%20order." target="_blank" class="btn btn-wa btn-full" style="margin-top:16px">
+        💬 Quick WhatsApp Order
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="mark">AB</div><div class="fname">Al <b>Baik</b> Pizza</div><p>Fast food & catering in Mirwah Colony, Khairpur. By Karachi Nimco.</p></div>
+    <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Menu</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h5>Menu</h5><a href="products.html">Pizzas</a><a href="products.html">Burgers</a><a href="products.html">Fries & Sides</a><a href="products.html">Drinks</a></div>
+    <div class="footer-col"><h5>Contact</h5><a href="tel:+923001234567">+92 300 1234567</a><a href="https://wa.me/923001234567" target="_blank">WhatsApp</a><a>Mirwah Colony, Khairpur</a><a>Open: 3PM – 12AM</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Al Baik Pizza. All rights reserved.</p><p>Made with ❤️ in Khairpur</p></div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/923001234567" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script src="script.js"></script>
+<script>
+  function renderOrderMenu() {
+    const list = document.getElementById('orderMenuList'); if(!list) return;
+    list.innerHTML = PRODUCTS.map(p => `
+      <div class="order-item-row" data-cat="${p.cat}">
+        <div class="oi-emoji">${p.emoji}</div>
+        <div>
+          <div class="oi-name">${p.name}</div>
+          <div class="oi-price">Rs. ${p.price.toLocaleString()}</div>
+        </div>
+        <button class="oi-add" onclick="addToCart('${p.id}');renderOrderSummary();">+</button>
+      </div>`).join('');
+  }
+  // Override renderOrderSummary for this page with more detail
+  const _origROS = renderOrderSummary;
+  function renderOrderSummary() {
+    const list = document.getElementById('orderList');
+    const tot  = document.getElementById('orderTotal');
+    if(!list) return;
+    if(!cart.length){
+      list.innerHTML='<p style="color:var(--muted);font-size:13px">No items yet.</p>';
+      if(tot) tot.textContent='Rs. 0'; return;
+    }
+    list.innerHTML = cart.map((ci,i) => {
+      const p = PRODUCTS.find(x=>x.id===ci.id); if(!p) return '';
+      return `<div class="summary-item">
+        <span class="si-emoji">${p.emoji}</span>
+        <div class="si-info"><div class="si-name">${p.name}</div><div class="si-sub">Rs. ${p.price.toLocaleString()} each</div></div>
+        <div class="si-controls">
+          <button class="si-btn" onclick="changeQty('${p.id}',-1);renderOrderSummary()">−</button>
+          <span style="color:#fff;font-weight:700;min-width:16px;text-align:center;font-size:13px">${ci.qty}</span>
+          <button class="si-btn" onclick="changeQty('${p.id}',1);renderOrderSummary()">+</button>
+        </div>
+        <div class="si-price">Rs. ${(p.price*ci.qty).toLocaleString()}</div>
+      </div>`;
+    }).join('');
+    const total = cart.reduce((s,ci)=>{const p=PRODUCTS.find(x=>x.id===ci.id);return p?s+p.price*ci.qty:s;},0);
+    if(tot) tot.textContent=`Rs. ${total.toLocaleString()}`;
+  }
+  // filter tabs for order menu
+  document.addEventListener('click', e => {
+    if(e.target.classList.contains('filter-tab') && document.getElementById('orderMenuList')) {
+      const cat = e.target.dataset.cat;
+      document.querySelectorAll('#orderMenuList .order-item-row').forEach(row => {
+        row.style.display = (cat==='all'||row.dataset.cat===cat)?'':'none';
+      });
+    }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    renderOrderMenu();
+    renderOrderSummary();
+  });
+</script>
+</body>
+</html>
