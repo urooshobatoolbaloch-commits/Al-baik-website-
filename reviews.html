@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Customer Reviews — Al Baik Pizza</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .rating-hero { background:var(--dark-2); padding:80px 5%; border-bottom:1px solid var(--border); }
+    .rating-inner { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:300px 1fr; gap:60px; align-items:center; }
+    .rating-big { text-align:center; }
+    .rating-num { font-family:var(--font-d); font-size:96px; font-weight:900; color:var(--gold); line-height:1; }
+    .rating-stars { font-size:32px; color:var(--gold); letter-spacing:4px; margin:8px 0; }
+    .rating-count { font-size:14px; color:var(--muted); }
+    .rating-bars { }
+    .rbar { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .rbar-label { font-size:13px; color:var(--muted); width:48px; text-align:right; }
+    .rbar-track { flex:1; height:8px; background:var(--dark-3); border-radius:4px; overflow:hidden; }
+    .rbar-fill { height:100%; background:var(--gold); border-radius:4px; transition:width 1s var(--ease); }
+    .rbar-count { font-size:12px; color:var(--muted); width:20px; }
+    .write-review { background:var(--dark-2); border:1px solid var(--border); border-radius:var(--radius); padding:40px; max-width:680px; margin:0 auto; }
+    .write-review h3 { font-family:var(--font-d); font-size:26px; color:#fff; margin-bottom:8px; }
+    .write-review > p { color:var(--muted); font-size:14px; margin-bottom:28px; }
+    .star-picker { display:flex; gap:8px; margin-bottom:4px; }
+    .star-btn { font-size:28px; background:none; border:none; cursor:pointer; opacity:.3; transition:.15s; }
+    .star-btn.lit { opacity:1; }
+    @media(max-width:700px) { .rating-inner { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body class="page-enter">
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><div class="mark">AB</div><span class="name">Al <b>Baik</b> Pizza</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="products.html">Menu</a></li><li><a href="reviews.html" class="active">Reviews</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="order.html" class="nav-order">Order Now →</a>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mob-nav">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Menu</a>
+  <a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="order.html" style="color:var(--red)">Order Now →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="stripe"></span>
+    <span class="eyebrow">Customer Reviews</span>
+    <h1>What Our <span style="color:var(--gold)">Customers Say</span></h1>
+    <p>Real reviews from real customers across Khairpur. Honest feedback means everything to us.</p>
+  </div>
+</div>
+
+<!-- RATING OVERVIEW -->
+<div class="rating-hero">
+  <div class="rating-inner">
+    <div class="rating-big" data-sr>
+      <div class="rating-num">4.0</div>
+      <div class="rating-stars">★★★★☆</div>
+      <div class="rating-count">Based on 8 verified reviews</div>
+      <div style="margin-top:20px"><a href="https://wa.me/923001234567?text=Hi!%20I%20want%20to%20leave%20a%20review%20for%20Al%20Baik%20Pizza." target="_blank" class="btn btn-red btn-sm">Leave a Review</a></div>
+    </div>
+    <div class="rating-bars" data-sr data-delay="100">
+      <div class="rbar"><span class="rbar-label">5 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:63%"></div></div><span class="rbar-count">5</span></div>
+      <div class="rbar"><span class="rbar-label">4 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:37%"></div></div><span class="rbar-count">3</span></div>
+      <div class="rbar"><span class="rbar-label">3 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:0%"></div></div><span class="rbar-count">0</span></div>
+      <div class="rbar"><span class="rbar-label">2 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:0%"></div></div><span class="rbar-count">0</span></div>
+      <div class="rbar"><span class="rbar-label">1 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:0%"></div></div><span class="rbar-count">0</span></div>
+      <div style="margin-top:20px;padding:16px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:10px">
+        <p style="font-size:13px;color:var(--muted);line-height:1.65">All reviews are from verified customers who have ordered from Al Baik Pizza. We are committed to transparency.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL REVIEWS -->
+<section>
+  <div class="section-inner">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:40px">
+      <div>
+        <span class="eyebrow">All Reviews</span>
+        <h2 class="section-title"><span class="g">8 Verified</span> Customer Reviews</h2>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterReviewsByStars(0,this)">All</button>
+        <button class="filter-tab" onclick="filterReviewsByStars(5,this)">5 ★</button>
+        <button class="filter-tab" onclick="filterReviewsByStars(4,this)">4 ★</button>
+      </div>
+    </div>
+    <div class="grid-3" id="reviewsGrid"></div>
+  </div>
+</section>
+
+<!-- WRITE REVIEW -->
+<section style="background:var(--dark-2)">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:40px">
+      <span class="eyebrow">Share Your Experience</span>
+      <h2 class="section-title">Write a <span class="r">Review</span></h2>
+      <p style="color:var(--muted);max-width:500px;margin:0 auto">Tried our food? We'd love to hear what you think — your feedback helps us improve and helps others discover great food.</p>
+    </div>
+    <div class="write-review">
+      <h3>Leave Your Review</h3>
+      <p>Your review will be submitted via WhatsApp to our team.</p>
+      <form id="reviewForm">
+        <div class="form-row">
+          <div class="form-group"><label>Your Name *</label><input class="form-control" id="rv-name" placeholder="e.g. Ahmed Khan" required/></div>
+          <div class="form-group"><label>Phone</label><input class="form-control" id="rv-phone" placeholder="03001234567"/></div>
+        </div>
+        <div class="form-group">
+          <label>Rating *</label>
+          <div class="star-picker">
+            <button type="button" class="star-btn" data-val="1" onclick="setRating(1)">★</button>
+            <button type="button" class="star-btn" data-val="2" onclick="setRating(2)">★</button>
+            <button type="button" class="star-btn" data-val="3" onclick="setRating(3)">★</button>
+            <button type="button" class="star-btn" data-val="4" onclick="setRating(4)">★</button>
+            <button type="button" class="star-btn" data-val="5" onclick="setRating(5)">★</button>
+          </div>
+          <input type="hidden" id="rv-rating" value="0"/>
+        </div>
+        <div class="form-group"><label>What did you order?</label><input class="form-control" id="rv-item" placeholder="e.g. Chicken Tikka Pizza"/></div>
+        <div class="form-group"><label>Your Review *</label><textarea class="form-control" id="rv-text" placeholder="Tell us about your experience..." required></textarea></div>
+        <button type="submit" class="btn btn-wa btn-full">💬 Submit Review via WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="mark">AB</div><div class="fname">Al <b>Baik</b> Pizza</div><p>Fast food & catering in Mirwah Colony, Khairpur. By Karachi Nimco.</p></div>
+    <div class="footer-col"><h5>Pages</h5><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Menu</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h5>Menu</h5><a href="products.html">Pizzas</a><a href="products.html">Burgers</a><a href="products.html">Fries & Sides</a><a href="products.html">Drinks</a></div>
+    <div class="footer-col"><h5>Contact</h5><a href="tel:+923001234567">+92 300 1234567</a><a href="https://wa.me/923001234567" target="_blank">WhatsApp</a><a>Mirwah Colony, Khairpur</a><a>Open: 3PM – 12AM</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 Al Baik Pizza. All rights reserved.</p><p>Made with ❤️ in Khairpur</p></div>
+</footer>
+
+<a class="wa-fab" href="https://wa.me/923001234567" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script src="script.js"></script>
+<script>
+  let selectedRating = 0;
+  function setRating(val) {
+    selectedRating = val;
+    document.getElementById('rv-rating').value = val;
+    document.querySelectorAll('.star-btn').forEach(b => {
+      b.classList.toggle('lit', parseInt(b.dataset.val) <= val);
+    });
+  }
+
+  function filterReviewsByStars(stars, btn) {
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.review-card').forEach(card => {
+      const s = parseInt(card.dataset.stars || 5);
+      card.parentElement.style.display = (stars === 0 || s === stars) ? '' : 'none';
+    });
+  }
+
+  document.getElementById('reviewForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('rv-name').value.trim();
+    const phone = document.getElementById('rv-phone').value.trim();
+    const item = document.getElementById('rv-item').value.trim();
+    const text = document.getElementById('rv-text').value.trim();
+    const rating = selectedRating;
+    if (!name || !text) { showToast('Please fill name and review'); return; }
+    if (!rating) { showToast('Please select a star rating'); return; }
+    const stars = '★'.repeat(rating) + '☆'.repeat(5-rating);
+    const msg = `⭐ *Review for Al Baik Pizza*\n\n*Name:* ${name}\n*Phone:* ${phone||'N/A'}\n*Rating:* ${stars} (${rating}/5)\n*Item Ordered:* ${item||'N/A'}\n\n*Review:*\n${text}`;
+    window.open(`https://wa.me/923001234567?text=${encodeURIComponent(msg)}`, '_blank');
+    showToast('✅ Review sent via WhatsApp!');
+    e.target.reset(); selectedRating = 0;
+    document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('lit'));
+  });
+
+  // Add data-stars to rendered cards after render
+  setTimeout(() => {
+    document.querySelectorAll('.review-card').forEach((card, i) => {
+      const stars = card.querySelector('.review-stars')?.textContent?.split('').filter(c=>c==='★').length || 5;
+      card.dataset.stars = stars;
+    });
+  }, 100);
+</script>
+</body>
+</html>
